@@ -3975,6 +3975,10 @@ static void test_dpi_context(void)
     }
     if (real_dpi != USER_DEFAULT_SCREEN_DPI) test_dpi_stock_objects( hdc );
     ReleaseDC( 0, hdc );
+
+    /* Test DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2 */
+    awareness = pGetAwarenessFromDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
+    ok (awareness == DPI_AWARENESS_PER_MONITOR_AWARE || broken (awareness == DPI_AWARENESS_INVALID), "wrong value %x\n", awareness); /* Win10 1709+ */
 }
 
 static LRESULT CALLBACK dpi_winproc( HWND hwnd, UINT msg, WPARAM wp, LPARAM lp )
